@@ -3,13 +3,13 @@
 import csv, xlrd
 
 # ALL THE FIELDS TO NOTICE
-isInitialObjective = True
-filePathToCompareAgainst = './student-IO.csv' # edit this part to whichever file u are comparing against
+isInitialObjective = False
+filePathToCompareAgainst = './student-info.csv' # edit this part to whichever file u are comparing against
 masterListPath = "./sip_31May2022.xlsx" # list sent to us by prof
 yourName = "Kor Ming Soon" # edit to your name
 
 # submitted student names
-file = open(filePathToCompareAgainst)
+file = open(filePathToCompareAgainst, encoding="utf8")
 csvreader = csv.reader(file)
 header = []
 header = next(csvreader)
@@ -37,14 +37,18 @@ studentsUnderYou.sort(key=lambda x: x[0])
 # Actual stuff
 studentsNotSubmitted = []
 studentsSupervisorNotApproved = []
-
+print(submittedNames)
 for studentUnderYou in studentsUnderYou:
     studentName = studentUnderYou[0]
     if studentName not in submittedNames:
+        print(studentName)
         studentsNotSubmitted.append(studentUnderYou)
 
 # Sanity Check
 if not (len(studentsUnderYou) - len(submittedNames) == len(studentsNotSubmitted)):
+    print("Students Total No: ", str(len(studentsUnderYou)))
+    print("Submitted Students Total No: ", str(len(submittedNames)))
+    print("Unsubmitted Students Total No: ", str(len(studentsNotSubmitted)))
     print("Number does not tally.")
 
  # Final Tally
